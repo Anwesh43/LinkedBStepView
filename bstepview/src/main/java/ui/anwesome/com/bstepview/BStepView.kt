@@ -163,4 +163,25 @@ class BStepView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BStepView) {
+        private val animator : Animator = Animator(view)
+        private val bstep : BStep = BStep(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            bstep.draw(canvas, paint)
+            animator.animate {
+                bstep.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            bstep.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
