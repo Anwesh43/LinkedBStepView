@@ -11,6 +11,28 @@ import android.content.Context
 
 val nodes : Int = 5
 
+fun Canvas.drawBSNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = w / (nodes + 1)
+    val r : Float = gap/6
+    paint.style = Paint.Style.STROKE
+    paint.strokeWidth = Math.min(w, h) / 60
+    paint.color = Color.parseColor("#673AB7")
+    paint.strokeCap = Paint.Cap.ROUND
+    save()
+    translate(gap + i * gap, h/2)
+    for (j in 0..1) {
+        val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f * j)) * 2
+        save()
+        scale(1f, 1f - 2 * j)
+        drawLine(0f, -r - r * sc, 0f, -r + r * sc, paint)
+        drawArc(RectF(-2 * r, 0f, 0f, 2 * r), -90f * sc, 180f * sc, false, paint)
+        restore()
+    }
+    restore()
+}
+
 class BStepView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
