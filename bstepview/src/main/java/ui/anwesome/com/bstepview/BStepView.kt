@@ -28,7 +28,7 @@ fun Canvas.drawBSNode(i : Int, scale : Float, paint : Paint) {
         save()
         scale(1f, 1f - 2 * j)
         drawLine(0f, -r - r * sc, 0f, -r + r * sc, paint)
-        drawArc(RectF(-2 * r, 0f, 0f, 2 * r), -90f * sc, 180f * sc, false, paint)
+        drawArc(RectF(0f, -2 * r, r, 0f), -90f * sc, 180f * sc, false, paint)
         restore()
     }
     restore()
