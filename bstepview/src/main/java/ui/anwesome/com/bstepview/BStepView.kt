@@ -4,6 +4,7 @@ package ui.anwesome.com.bstepview
  * Created by anweshmishra on 19/10/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.graphics.*
@@ -184,6 +185,14 @@ class BStepView(ctx : Context) : View(ctx) {
             bstep.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : BStepView {
+            val view : BStepView = BStepView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
